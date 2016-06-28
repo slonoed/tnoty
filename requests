@@ -1,0 +1,2 @@
+GET http://localhost:8080/secret_url?text=Helllo%20my%20friend&werwer=1231
+sdfd

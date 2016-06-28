@@ -1,4 +1,4 @@
-FROM clojure
+FROM clojure:alpine
 MAINTAINER email@slonoed.net
 
 EXPOSE 8080

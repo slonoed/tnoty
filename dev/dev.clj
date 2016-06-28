@@ -2,6 +2,7 @@
   "Tools for interactive development with the REPL. This file should
   not be included in a production build of the application."
   (:require
+   [local :as local]
    [clojure.java.io :as io]
    [clojure.java.javadoc :refer [javadoc]]
    [clojure.pprint :refer [pprint]]
@@ -25,10 +26,10 @@
   #'system."
   []
   (alter-var-root #'system
-                  (constantly (create-system {:port port
-                                              :secret secret
-                                              :token token
-                                              :chat-id 1}))))
+                  (constantly (create-system {:port 8080
+                                              :secret "secret_url"
+                                              :token local/token
+                                              :chat-id local/chat-id}))))
 
 (defn start
   "Starts the system running, updates the Var #'system."

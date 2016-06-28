@@ -2,11 +2,18 @@
   (:use org.httpkit.server)
   (:require [com.stuartsierra.component :as component]
             [org.httpkit.client :as http]
+            [clojure.string :as str]
             [cheshire.core :as json]))
 
 (defn text-param [a]
-  (second (first (filter #(= "text" (first %)) (map #(clojure.string/split % #"=")
-                                                    (clojure.string/split a  #"\&"))))))
+ (-> a
+    (str/split #"\&")
+    ((partial map #(clojure.string/split % #"=")))
+    ((partial filter #(= "text" (first %))))
+    first
+    second
+    (or "")))
+
 
 (defn ->bot [token chat-id text]
   (http/request {:url (str "https://api.telegram.org/bot" token "/sendMessage")
